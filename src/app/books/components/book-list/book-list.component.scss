@@ -1,0 +1,113 @@
+.full-width {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.book {
+  &-table {
+    width: 100%;
+    cursor: pointer;
+
+    &__container {
+      max-width: 800px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    &__filter {
+      min-width: 150px;
+      width: 100%;
+    }
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+
+  &__description {
+    width: 100%;
+  }
+
+  &__row td {
+    border-bottom-width: 0;
+  }
+
+  &__detail {
+    overflow: hidden;
+    display: flex;
+    cursor: auto;
+  }
+
+  &__title {
+    text-align: center;
+    width: 100%;
+  }
+
+  &__presentation {
+    min-width: 80px;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 200px;
+  }
+
+  &__image {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+    width: 100%;
+  }
+
+  &__description {
+    padding: 16px;
+  }
+
+  &__description-attribution {
+    opacity: 0.5;
+  }
+}
+
+tr {
+  td,
+  th {
+    &:nth-child(1) {
+      width: 100px;
+    }
+
+    &:nth-child(2) {
+      min-width: 50px;
+    }
+
+    &:nth-child(3) {
+      width: 120px;
+    }
+
+    &:nth-child(4) {
+      width: 150px;
+    }
+
+    &:nth-child(5) {
+      width: 65px;
+    }
+  }
+
+  &.book__detail-row {
+    height: 0;
+  }
+
+  &.book__row:not(.expanded-row):hover {
+    background: #777;
+  }
+
+  &.book__row:not(.expanded-row):active {
+    background: #efefef;
+  }
+}
