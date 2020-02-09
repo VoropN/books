@@ -34,3 +34,66 @@ mat-progress-spinner.mat-progress-spinner {
 .mat-app-background {
   min-height: 100%;
 }
+
+ngx-daterangepicker-material {
+  .md-drppicker {
+    background-color: #444;
+    border: 1px solid #777;
+    .ranges .ng-star-inserted {
+      border-color: transparent;
+      margin-top: 5px;
+      overflow: hidden;
+      border-radius: 4px;
+
+      button {
+        color: #fff;
+        outline: none;
+        overflow: hidden;
+
+        &.active {
+          background-color: seagreen;
+        }
+
+        &:hover {
+          background-color: rgb(58, 180, 111);
+        }
+      }
+    }
+  }
+
+  .calendar .calendar-table {
+    border-color: #777;
+    background-color: #555;
+
+    .table-condensed thead th {
+      color: #999;
+    }
+
+    .active,
+    .active:hover {
+      background-color: seagreen;
+
+      &.start-date.end-date {
+        background-color: greenyellow;
+      }
+    }
+
+    & .available:hover {
+      background-color: rgba(58, 180, 111, 0.5);
+    }
+  }
+
+  .buttons.ng-star-inserted .btn {
+    background-color: seagreen;
+  }
+
+  .btn.btn-default.clear.ng-star-inserted {
+    display: inline-flex;
+    margin-right: 10px;
+    margin-top: 5px;
+
+    svg {
+      height: 25px;
+    }
+  }
+}

@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [BookListComponent],
@@ -30,6 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
+    NgxDaterangepickerMd.forRoot()
   ]
 })
 export class BooksModule { }

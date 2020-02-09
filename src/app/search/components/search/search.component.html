@@ -1,0 +1,11 @@
+<form class="book-table__filter">
+  <mat-form-field class="full-width">
+    <input type="text" placeholder="Search Books" aria-label="number" matInput [formControl]="filterBookControl" [matAutocomplete]="auto" />
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBook">
+      <mat-option *ngFor="let books of filteredBooks | async" [value]="books.Title">
+        <img class="book__icon" mat-card-image src="assets/icons/book.svg" alt="book" height="25" />
+        {{ books.Title }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
