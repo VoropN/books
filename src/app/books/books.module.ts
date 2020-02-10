@@ -7,12 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { SearchModule } from '../search/search.module';
+import { DateRangeModule } from '../date-range/date-range.module';
 
 @NgModule({
   declarations: [BookListComponent],
@@ -22,15 +20,12 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     MatCardModule,
     MatPaginatorModule,
     MatSortModule,
-    ReactiveFormsModule,
-    FormsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatAutocompleteModule,
-    NgxDaterangepickerMd.forRoot()
+    SearchModule,
+    DateRangeModule,
   ]
 })
 export class BooksModule { }

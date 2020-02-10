@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Book } from 'src/app/shared/models/book.model';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-search',
@@ -9,13 +11,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  public filterBookControl = new FormControl();
-  public books: Book[];
-  public filteredBooks: Observable<Book[]>;
+  @Input() public books: Book[];
+  @Output() public search = new EventEmitter<string>();
+  public searchBooks = new FormControl();
+  private destroy$ = new Subject();
 
-  constructor() { }
-
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.searchBooks.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+      const searchValue = value.trim().toLowerCase();
+      this.search.emit(searchValue);
+    });
   }
 
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

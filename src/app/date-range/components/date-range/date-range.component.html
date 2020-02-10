@@ -1,0 +1,18 @@
+<mat-form-field>
+  <input
+    type="text"
+    opens="center"
+    matInput
+    (datesUpdated)="updateDateRange($event)"
+    placeholder="Choose date"
+    ngxDaterangepickerMd
+    [ranges]="ranges"
+    alwaysShowCalendars="true"
+    startKey="start"
+    endKey="end"
+    showRangeLabelOnInput="true"
+    [showClearButton]="true"
+    name="daterange"
+    autocomplete="off"
+    />
+</mat-form-field>

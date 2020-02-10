@@ -1,50 +1,13 @@
 <div class="book-table__container">
-  <mat-form-field>
-    <input
-      type="text"
-      opens="center"
-      matInput
-      (datesUpdated)="choosedDate($event)"
-      placeholder="Choose date"
-      ngxDaterangepickerMd
-      [ranges]="ranges"
-      alwaysShowCalendars="true"
-      startKey="start"
-      endKey="end"
-      [(ngModel)]="selected"
-      showRangeLabelOnInput="true"
-      [showClearButton]="true"
-      name="daterange"
-      autocomplete="off"
-    />
-  </mat-form-field>
-  <form class="book-table__filter">
-    <mat-form-field class="full-width">
-      <input
-        type="text"
-        placeholder="Search Books"
-        aria-label="number"
-        matInput
-        [formControl]="filterBookControl"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBook">
-        <mat-option
-          *ngFor="let books of filteredBooks | async"
-          [value]="books.Title"
-        >
-          <img
-            class="book__icon"
-            mat-card-image
-            src="assets/icons/book.svg"
-            alt="book"
-            height="25"
-          />
-          {{ books.Title }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+
+  <app-date-range
+    (selectDate)="updateDateRange($event)"
+  ></app-date-range>
+
+  <app-search
+    (search)="updateSearchValue($event)"
+    [books]="bookTable ? bookTable.filteredData : []"
+  ></app-search>
 
   <div class="book-table__wrapper">
     <table
