@@ -1,0 +1,18 @@
+<mat-form-field >
+  <input
+    class="calendar"
+    [(ngModel)]="selected"
+    [singleDatePicker]="true"
+    [autoApply]="false"
+    (datesUpdated)="updateDate($event)"
+    type="text"
+    drops="up"
+    opens="right"
+    matInput
+    placeholder="Publish date"
+    ngxDaterangepickerMd
+    alwaysShowCalendars="true"
+    name="daterange"
+    autocomplete="off"
+  />
+</mat-form-field>

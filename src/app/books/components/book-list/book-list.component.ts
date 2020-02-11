@@ -5,9 +5,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { trigger, style, animate, transition, state } from '@angular/animations';
 import { DateRanges } from '../../../shared/models/date-ranges.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EditBookComponent } from '../edit-book/edit-book.component';
 
 @Component({
   selector: 'app-book-list',
@@ -30,13 +32,16 @@ export class BookListComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['ID', 'Title', 'PageCount', 'PublishDate', 'Edit'];
   public expandedElement: Book | null;
   public showSpinner = true;
+  public lastEditBook: Book;
 
   private destroy$ = new Subject();
   private searchValue: string = '';
   private needUpdate: string = 'need update table';
   private selectDate: DateRanges;
 
-  constructor(private bookService: BookService) { }
+  constructor(
+    private bookService: BookService,
+    public dialog: MatDialog) { }
 
   public ngOnInit(): void {
     this.filterPredicate = this.filterPredicate.bind(this);
@@ -74,7 +79,26 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookTable.paginator.firstPage();
   }
 
-  public openDialog(event: Event): void {
+  public openDialog(book: Book): void {
+    const dialogRef = this.dialog.open(EditBookComponent, {
+      data: { ...book },
+    });
+
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe((result) => {
+        if (result) {
+          this.lastEditBook = { ...book };
+        }
+        Object.assign(book, result);
+      });
+
+    event.stopPropagation();
+  }
+
+  public undoLastEditBook(book: Book): void {
+    Object.assign(book, this.lastEditBook);
+    this.lastEditBook = null;
     event.stopPropagation();
   }
 

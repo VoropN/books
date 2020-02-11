@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 
 export class DateRanges {
-  startDate: Moment;
-  endDate: Moment;
+  startDate: Moment | Date;
+  endDate: Moment | Date;
 }

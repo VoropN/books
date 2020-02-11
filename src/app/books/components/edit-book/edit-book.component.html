@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Data Book</h2>
+<mat-dialog-content class="mat-typography">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Information</mat-label>
+      <input matInput [(ngModel)]="data.Title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea rows="3" class="description" #txt="ngModel" matInput [(ngModel)]="data.Description"></textarea>
+    </mat-form-field>
+    <mat-form-field class="control-width">
+      <mat-label>PageCount</mat-label>
+      <input matInput [(ngModel)]="data.PageCount" />
+    </mat-form-field>
+    <app-date-single class="control-width"
+      (selectDate)="updateDate($event)"
+      [date]="data.PublishDate"
+    ></app-date-single>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+      Ok
+    </button>
+  </div>
+</mat-dialog-content>

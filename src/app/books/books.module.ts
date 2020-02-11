@@ -7,13 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { SearchModule } from '../search/search.module';
-import { DateRangeModule } from '../date-range/date-range.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { EditBookComponent } from './components/edit-book/edit-book.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { CalendarModule } from '../calendar/calendar.module';
+
 
 @NgModule({
-  declarations: [BookListComponent],
+  declarations: [BookListComponent, EditBookComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -21,11 +26,15 @@ import { DateRangeModule } from '../date-range/date-range.module';
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
-    MatFormFieldModule,
     MatTableModule,
     MatProgressSpinnerModule,
     SearchModule,
-    DateRangeModule,
-  ]
+    CalendarModule,
+    MatTooltipModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule,
+  ],
+  entryComponents: [EditBookComponent]
 })
 export class BooksModule { }

@@ -64,6 +64,15 @@
   &__description-attribution {
     opacity: 0.5;
   }
+
+  &__button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    & + & {
+      margin-top: 0;
+    }
+  }
 }
 
 tr {

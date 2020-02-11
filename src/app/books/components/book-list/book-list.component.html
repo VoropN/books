@@ -49,11 +49,23 @@
         <td mat-cell *matCellDef="let row">
           <mat-card-actions>
             <button
+              class="book__button"
               mat-raised-button
               color="primary"
-              (click)="openDialog($event)"
+              matTooltip="Edit information about {{row.Title}}"
+              (click)="openDialog(row)"
             >
               Edit
+            </button>
+            <button
+              class="book__button"
+              *ngIf="lastEditBook && lastEditBook.ID === row.ID"
+              mat-raised-button
+              color="warn"
+              matTooltip="Undo last change"
+              (click)="undoLastEditBook(row)"
+            >
+              Undo
             </button>
           </mat-card-actions>
         </td>

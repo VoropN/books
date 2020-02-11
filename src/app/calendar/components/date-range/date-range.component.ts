@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { DateRanges } from '../../../shared/models/date-ranges.model';
-import { PeriodRanges } from '../../../shared/models/period-ranges.model';
+import { PeriodRanges } from 'src/app/shared/models/period-ranges.model';
+import { DateRanges } from 'src/app/shared/models/date-ranges.model';
 
 @Component({
   selector: 'app-date-range',
