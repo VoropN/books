@@ -4,7 +4,7 @@ import { DateRangeComponent } from './components/date-range/date-range.component
 import { MatInputModule } from '@angular/material/input';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DateSingleComponent } from './components/date-single/date-single.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxDaterangepickerMd.forRoot(),
   ],
   exports: [DateRangeComponent, DateSingleComponent]

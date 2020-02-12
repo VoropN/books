@@ -12,10 +12,10 @@ import { SearchModule } from '../search/search.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditBookComponent } from './components/edit-book/edit-book.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { CalendarModule } from '../calendar/calendar.module';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [BookListComponent, EditBookComponent],
@@ -32,8 +32,9 @@ import { CalendarModule } from '../calendar/calendar.module';
     CalendarModule,
     MatTooltipModule,
     MatDialogModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
+    MatIconModule
   ],
   entryComponents: [EditBookComponent]
 })

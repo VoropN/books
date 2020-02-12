@@ -32,7 +32,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['ID', 'Title', 'PageCount', 'PublishDate', 'Edit'];
   public expandedElement: Book | null;
   public showSpinner = true;
-  public lastEditBook: Book;
+  public initialBookCache = new Map<number, Book>();
 
   private destroy$ = new Subject();
   private searchValue: string = '';
@@ -81,24 +81,34 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   public openDialog(book: Book): void {
     const dialogRef = this.dialog.open(EditBookComponent, {
-      data: { ...book },
+      data: book,
     });
 
     dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((result) => {
         if (result) {
-          this.lastEditBook = { ...book };
+          this.tryAddBookToCache(book);
+          Object.assign(book, result);
         }
-        Object.assign(book, result);
       });
 
     event.stopPropagation();
   }
 
+  private tryAddBookToCache(book: Book): void  {
+    if (!this.hasBookCache(book)) {
+      this.initialBookCache.set(book.ID, { ...book });
+    }
+  }
+
+  public hasBookCache(book: Book): boolean {
+    return this.initialBookCache.has(book.ID);
+  }
+
   public undoLastEditBook(book: Book): void {
-    Object.assign(book, this.lastEditBook);
-    this.lastEditBook = null;
+    Object.assign(book, this.initialBookCache.get(book.ID));
+    this.initialBookCache.delete(book.ID);
     event.stopPropagation();
   }
 

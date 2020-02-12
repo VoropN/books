@@ -47,26 +47,16 @@
       <ng-container matColumnDef="Edit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
-          <mat-card-actions>
-            <button
-              class="book__button"
-              mat-raised-button
-              color="primary"
-              matTooltip="Edit information about {{row.Title}}"
-              (click)="openDialog(row)"
-            >
-              Edit
-            </button>
-            <button
-              class="book__button"
-              *ngIf="lastEditBook && lastEditBook.ID === row.ID"
-              mat-raised-button
-              color="warn"
-              matTooltip="Undo last change"
-              (click)="undoLastEditBook(row)"
-            >
-              Undo
-            </button>
+          <mat-card-actions class="book__buttons">
+            <mat-icon
+              *ngIf="hasBookCache(row)"
+              class="book__button book__button--undo"
+              matTooltip="Undo changes"
+              (click)="undoLastEditBook(row)">undo</mat-icon>
+            <mat-icon
+              class="book__button book__button--edit"
+              matTooltip="Edit {{row.Title}}"
+              (click)="openDialog(row)">edit</mat-icon>
           </mat-card-actions>
         </td>
       </ng-container>

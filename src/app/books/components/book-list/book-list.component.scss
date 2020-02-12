@@ -65,12 +65,26 @@
     opacity: 0.5;
   }
 
-  &__button {
-    margin-top: 5px;
-    margin-bottom: 5px;
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-    & + & {
-      margin-top: 0;
+  &__button {
+    margin: 5px 0 5px 5px;
+    padding: 0;
+    filter: contrast(2.5) brightness(1.5) drop-shadow(1px 1px 3px black);
+
+    &--undo {
+      color: red;
+    }
+
+    &--edit {
+      color: greenyellow;
+    }
+
+    &:hover {
+      filter: none;
     }
   }
 }
@@ -91,11 +105,11 @@ tr {
     }
 
     &:nth-child(4) {
-      width: 150px;
+      width: 120px;
     }
 
     &:nth-child(5) {
-      width: 65px;
+      width: 115px;
     }
   }
 
