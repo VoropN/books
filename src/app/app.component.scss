@@ -1,7 +1,10 @@
 .nav {
-  &__container {
-    max-width: 980px;
-    margin: auto;
-    padding: 15px;
+  max-width: 980px;
+  margin: auto;
+  padding: 15px;
+  padding-bottom: 0;
+
+  &__item {
+    margin-right: 10px;
   }
 }

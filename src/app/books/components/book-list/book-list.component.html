@@ -8,6 +8,14 @@
     [books]="bookTable ? bookTable.filteredData : []"
   ></app-search>
 
+  <mat-card-actions class="book__export">
+    <button class="book__button book__button--save" mat-button (click)="exportToExcel()">
+      <mat-icon>cloud_download</mat-icon>
+      .xlsx
+    </button>
+    <!-- <button mat-raised-button >excel</button> -->
+  </mat-card-actions>
+
   <div class="book-table__wrapper">
     <table
       class="book-table"

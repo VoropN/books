@@ -11,8 +11,11 @@
     &__container {
       max-width: 800px;
       margin: auto;
-      padding: 15px;
+      padding: 0 15px 15px;
     }
+  }
+
+  &__export {
   }
 
   &__icon {
@@ -79,8 +82,13 @@
       color: red;
     }
 
-    &--edit {
+    &--edit,
+    &--save {
       color: greenyellow;
+    }
+
+    &--save {
+      margin: 0;
     }
 
     &:hover {

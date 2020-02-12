@@ -4,7 +4,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { BookService } from '../../services/book/book.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-chart',
@@ -44,7 +44,7 @@ export class BookChartComponent implements OnInit {
 
   public getBooks(): void {
     this.bookService.getBooks()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((books) => {
         const bookMapByYears = {};
 

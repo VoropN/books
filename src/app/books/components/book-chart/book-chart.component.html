@@ -1,6 +1,6 @@
-<div class="chart__container" *ngIf="barChartData">
+<div class="chart__container">
   <h3 class="chart__title">Number of books by year of publication</h3>
-  <div>
+  <div *ngIf="barChartData">
     <div style="display: block">
       <canvas baseChart
         [datasets]="barChartData"

@@ -10,6 +10,8 @@ import { trigger, style, animate, transition, state } from '@angular/animations'
 import { DateRanges } from '../../../shared/models/date-ranges.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditBookComponent } from '../edit-book/edit-book.component';
+import { ExportFileService } from 'src/app/shared/services/export-file.service';
+
 
 @Component({
   selector: 'app-book-list',
@@ -41,7 +43,8 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   constructor(
     private bookService: BookService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private exportFile: ExportFileService) { }
 
   public ngOnInit(): void {
     this.filterPredicate = this.filterPredicate.bind(this);
@@ -59,6 +62,11 @@ export class BookListComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public exportToExcel(): void {
+    const fileName = `Books ${this.searchValue ? `[filter=${this.searchValue}]` : ''}`;
+    this.exportFile.exportAsExcelFile(this.bookTable.filteredData, fileName);
   }
 
   public updateSearchValue(searchValue: string): void {
