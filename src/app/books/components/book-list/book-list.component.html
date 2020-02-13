@@ -13,7 +13,10 @@
       <mat-icon>cloud_download</mat-icon>
       .xlsx
     </button>
-    <!-- <button mat-raised-button >excel</button> -->
+    <button class="book__button book__button--save" mat-button (click)="exportToPdf()">
+      <mat-icon>cloud_download</mat-icon>
+      .pdf
+    </button>
   </mat-card-actions>
 
   <div class="book-table__wrapper">
@@ -56,11 +59,13 @@
         <td mat-cell *matCellDef="let row">
           <mat-card-actions class="book__buttons">
             <mat-icon
+              appClickStopPropagation
               *ngIf="hasBookCache(row)"
               class="book__button book__button--undo"
               matTooltip="Undo changes"
               (click)="undoLastEditBook(row)">undo</mat-icon>
             <mat-icon
+              appClickStopPropagation
               class="book__button book__button--edit"
               matTooltip="Edit {{row.Title}}"
               (click)="openDialog(row)">edit</mat-icon>

@@ -18,9 +18,15 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { MatIconModule } from '@angular/material/icon';
 import { BookChartComponent } from './components/book-chart/book-chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { ClickStopPropagationDirective } from '../shared/directives/click-stop-propagation.directive';
 
 @NgModule({
-  declarations: [BookListComponent, EditBookComponent, BookChartComponent],
+  declarations: [
+    BookListComponent,
+    EditBookComponent,
+    BookChartComponent,
+    ClickStopPropagationDirective
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

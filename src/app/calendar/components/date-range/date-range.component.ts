@@ -16,7 +16,10 @@ export class DateRangeComponent implements OnInit {
   }
 
   private initRangesDate(): void {
-    const [month, year] = new Date().toLocaleString('en-US', { month: 'numeric', year: 'numeric' }).split('/').map((value) => Number(value));
+    const [month, year] = new Date()
+      .toLocaleString('en-US', { month: 'numeric', year: 'numeric' })
+      .split('/')
+      .map((value) => Number(value));
     this.ranges = {
       'This Month': [new Date(year, month - 1), new Date(year, month, 0)],
       'This Yearh': [new Date(year, 0), new Date(year + 1, 0, 0)],

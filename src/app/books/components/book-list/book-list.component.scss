@@ -82,13 +82,22 @@
       color: red;
     }
 
-    &--edit,
-    &--save {
-      color: greenyellow;
+    &--edit {
+      color: floralwhite;
+
+      &:hover {
+        color: greenyellow;
+      }
     }
 
     &--save {
-      margin: 0;
+      margin: 0 5px 5px 0;
+      color: floralwhite;
+      filter: none;
+
+      &:hover {
+        color: greenyellow;
+      }
     }
 
     &:hover {

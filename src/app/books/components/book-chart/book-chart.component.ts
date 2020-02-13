@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
@@ -11,7 +11,7 @@ import { takeUntil, take } from 'rxjs/operators';
   templateUrl: './book-chart.component.html',
   styleUrls: ['./book-chart.component.scss']
 })
-export class BookChartComponent implements OnInit {
+export class BookChartComponent implements OnInit, OnDestroy {
   public barChartOptions: ChartOptions;
   public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';

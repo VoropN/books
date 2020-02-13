@@ -12,7 +12,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditBookComponent } from '../edit-book/edit-book.component';
 import { ExportFileService } from 'src/app/shared/services/export-file.service';
 
-
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -37,8 +36,8 @@ export class BookListComponent implements OnInit, OnDestroy {
   public initialBookCache = new Map<number, Book>();
 
   private destroy$ = new Subject();
-  private searchValue: string = '';
-  private needUpdate: string = 'need update table';
+  private searchValue = '';
+  private needUpdate = 'need update table';
   private selectDate: DateRanges;
 
   constructor(
@@ -65,8 +64,13 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   public exportToExcel(): void {
-    const fileName = `Books ${this.searchValue ? `[filter=${this.searchValue}]` : ''}`;
+    const fileName = this.createFileName();
     this.exportFile.exportAsExcelFile(this.bookTable.filteredData, fileName);
+  }
+
+  public exportToPdf(): void {
+    const fileName = this.createFileName();
+    this.exportFile.exportAsPdfFile(this.bookTable.filteredData, fileName);
   }
 
   public updateSearchValue(searchValue: string): void {
@@ -100,14 +104,6 @@ export class BookListComponent implements OnInit, OnDestroy {
           Object.assign(book, result);
         }
       });
-
-    event.stopPropagation();
-  }
-
-  private tryAddBookToCache(book: Book): void  {
-    if (!this.hasBookCache(book)) {
-      this.initialBookCache.set(book.ID, { ...book });
-    }
   }
 
   public hasBookCache(book: Book): boolean {
@@ -117,16 +113,25 @@ export class BookListComponent implements OnInit, OnDestroy {
   public undoLastEditBook(book: Book): void {
     Object.assign(book, this.initialBookCache.get(book.ID));
     this.initialBookCache.delete(book.ID);
-    event.stopPropagation();
+  }
+
+  private createFileName(): string {
+    return `Books ${this.searchValue ? `[filter=${this.searchValue}]` : ''}`;
+  }
+
+  private tryAddBookToCache(book: Book): void {
+    if (!this.hasBookCache(book)) {
+      this.initialBookCache.set(book.ID, { ...book });
+    }
   }
 
   private filterPredicate(book: Book): boolean {
     let checkDate = true;
     let checkValue = true;
     if (this.selectDate && (this.selectDate.startDate || this.selectDate.endDate)) {
-      let publishDate = Number(new Date(book.PublishDate));
-      let startDate = this.selectDate.startDate.valueOf();
-      let endDate = this.selectDate.endDate.valueOf();
+      const publishDate = Number(new Date(book.PublishDate));
+      const startDate = this.selectDate.startDate.valueOf();
+      const endDate = this.selectDate.endDate.valueOf();
       checkDate = publishDate >= startDate && publishDate <= endDate;
     }
     if (this.searchValue !== '') {

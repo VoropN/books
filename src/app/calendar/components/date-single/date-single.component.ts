@@ -25,6 +25,6 @@ export class DateSingleComponent implements OnInit {
     this.selected = {
       startDate: new Date(this.date),
       endDate: new Date(this.date),
-    }
+    };
   }
 }

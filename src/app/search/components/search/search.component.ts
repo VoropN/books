@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Book } from 'src/app/shared/models/book.model';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   @Input() public books: Book[];
   @Output() public search = new EventEmitter<string>();
   public searchBooks = new FormControl();
