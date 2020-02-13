@@ -37,6 +37,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public onClousePanel(): void {
-    this.autocomplete.closePanel();
+    if (!this.autocomplete.activeOption) {
+      this.autocomplete.closePanel();
+    }
   }
 }

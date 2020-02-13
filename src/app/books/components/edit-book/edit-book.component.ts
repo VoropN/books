@@ -38,7 +38,7 @@ export class EditBookComponent implements OnInit {
       ID: [book.ID],
       Title: [book.Title, Validators.required],
       Description: [book.Description, Validators.required],
-      PageCount: [book.PageCount, Validators.required],
+      PageCount: [book.PageCount, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       PublishDate: [book.PublishDate, Validators.required]
     });
   }
@@ -47,7 +47,7 @@ export class EditBookComponent implements OnInit {
     this.bookForm = this.fb.group({
       Title: [null, Validators.required],
       Description: [null, Validators.required],
-      PageCount: [null, Validators.required],
+      PageCount: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       PublishDate: [null, Validators.required]
     });
   }
