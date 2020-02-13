@@ -120,17 +120,19 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   public undoLastEditBook(book: Book): void {
     const bookCache = this.initialBookCache.get(book.ID);
-    this.updateBookOnServer(book, bookCache);
-    this.initialBookCache.delete(book.ID);
+    const afterUpdate = () => this.initialBookCache.delete(book.ID);
+    this.updateBookOnServer(book, bookCache, afterUpdate);
+
   }
 
-  private updateBookOnServer(book: Book, changedBook: Book): void {
+  private updateBookOnServer(book: Book, changedBook: Book, afterUpdate?: () => void): void {
     this.bookService.putBook(changedBook)
       .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((updatedBook: Book) => {
         const message = `Book "${updatedBook.Title}" updated successfully!`;
         this.messageService.showNotification(message, 'success', 'Ok');
         Object.assign(book, changedBook);
+        afterUpdate();
       });
   }
 
