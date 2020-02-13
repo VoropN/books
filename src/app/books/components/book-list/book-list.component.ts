@@ -122,7 +122,6 @@ export class BookListComponent implements OnInit, OnDestroy {
     const bookCache = this.initialBookCache.get(book.ID);
     const afterUpdate = () => this.initialBookCache.delete(book.ID);
     this.updateBookOnServer(book, bookCache, afterUpdate);
-
   }
 
   private updateBookOnServer(book: Book, changedBook: Book, afterUpdate?: () => void): void {
@@ -132,7 +131,9 @@ export class BookListComponent implements OnInit, OnDestroy {
         const message = `Book "${updatedBook.Title}" updated successfully!`;
         this.messageService.showNotification(message, 'success', 'Ok');
         Object.assign(book, changedBook);
-        afterUpdate();
+        if (afterUpdate) {
+          afterUpdate();
+        }
       });
   }
 
