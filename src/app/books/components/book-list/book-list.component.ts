@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from '../../services/book/book.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { trigger, style, animate, transition, state } from '@angular/animations';
@@ -29,6 +29,7 @@ import { MessageService } from 'src/app/shared/services/message.service';
 export class BookListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) public paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) public sort: MatSort;
+  @ViewChild('table', { static: true }) public table: MatTable<Book>;
 
   public bookTable: MatTableDataSource<Book>;
   public displayedColumns: string[] = ['ID', 'Title', 'PageCount', 'PublishDate', 'Edit'];
@@ -57,6 +58,7 @@ export class BookListComponent implements OnInit, OnDestroy {
         this.bookTable.paginator = this.paginator;
         this.bookTable.sort = this.sort;
         this.showSpinner = false;
+        this.table.trackBy = this.trackByBooks;
       });
   }
 
@@ -140,6 +142,7 @@ export class BookListComponent implements OnInit, OnDestroy {
         this.messageService.showNotification(message, 'success', 'Ok');
         this.bookTable.data.push(newBook);
         this.filterBookTable(this.needUpdate);
+        this.table.renderRows();
       });
   }
 
@@ -166,5 +169,9 @@ export class BookListComponent implements OnInit, OnDestroy {
       checkValue = book.Title.toLowerCase().includes(this.searchValue);
     }
     return checkDate && checkValue;
+  }
+
+  private trackByBooks(index: number, book: Book): number {
+    return book.ID;
   }
 }

@@ -17,7 +17,8 @@ export class EditBookComponent implements OnInit {
     private fb: FormBuilder) { }
 
   public ngOnInit(): void {
-    if (this.book.ID) {
+    const shouldUpdateBook = Object.prototype.hasOwnProperty.call(this.book, 'ID');
+    if (shouldUpdateBook) {
       this.updateBook(this.book);
     } else {
       this.createBook();

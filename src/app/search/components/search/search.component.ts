@@ -29,4 +29,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  public trackByBooks(index: number, book: Book): number {
+    return book.ID;
+  }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { Book } from '../models/book.model';
 import { SaveFileOptions } from '../models/save-file-options';
@@ -12,10 +11,11 @@ import 'jspdf-autotable';
 export class ExportFileService {
   private dateOptions = { month: '2-digit', year: 'numeric', day: '2-digit' };
 
-  public exportAsExcelFile(books: Book[], fileName: string): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(books);
-    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  public async exportAsExcelFile(books: Book[], fileName: string): Promise<void> {
+    const { utils, write } = await import('xlsx');
+    const worksheet = utils.json_to_sheet(books);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+    const excelBuffer = write(workbook, { bookType: 'xlsx', type: 'array' });
     const options: SaveFileOptions = {
       fileName,
       extension: '.xlsx',

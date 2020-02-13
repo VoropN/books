@@ -11,7 +11,7 @@
       />
 
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let book of books" [value]="book.Title">
+      <mat-option *ngFor="let book of books; trackBy: trackByBooks" [value]="book.Title">
         <img
           class="book__icon"
           mat-card-image
