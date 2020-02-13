@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Book } from 'src/app/shared/models/book.model';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 export class SearchComponent implements OnInit, OnDestroy {
   @Input() public books: Book[];
   @Output() public search = new EventEmitter<string>();
+  @ViewChild(MatAutocompleteTrigger, {static: false}) public autocomplete: MatAutocompleteTrigger;
   public searchBooks = new FormControl();
   private destroy$ = new Subject();
 
@@ -32,5 +34,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   public trackByBooks(index: number, book: Book): number {
     return book.ID;
+  }
+
+  public onClousePanel(): void {
+    this.autocomplete.closePanel();
   }
 }
