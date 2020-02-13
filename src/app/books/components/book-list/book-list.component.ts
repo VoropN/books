@@ -93,7 +93,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookTable.paginator.firstPage();
   }
 
-  public openDialog(book: Book): void {
+  public openDialog(book?: Book): void {
     const dialogRef = this.dialog.open(EditBookComponent, {
       data: book || new Book(),
     });
