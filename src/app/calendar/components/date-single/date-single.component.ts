@@ -22,9 +22,12 @@ export class DateSingleComponent implements OnInit {
   }
 
   private initDate(): void {
-    this.selected = {
-      startDate: new Date(this.date),
-      endDate: new Date(this.date),
-    };
+    if (this.date) {
+      this.selected = { startDate: new Date(this.date), endDate: new Date(this.date) };
+    } else {
+      const date = new Date();
+      this.selected = { startDate: date, endDate: date };
+      this.updateDate(this.selected);
+    }
   }
 }

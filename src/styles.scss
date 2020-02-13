@@ -111,32 +111,36 @@ mat-dialog-container,
 }
 
 $reset-btn-bgc: #e7902c;
-$save-btn-bgc: #277a47;
+$save-btn-bgc: #777;
 $del-btn-bgc: #e7322c;
-$text-btn: #fff;
-$background-btn: #333;
+$text-message: #888;
+$text-message-error: #fff;
+$background-btn: #424242;
+$text-btn: greenyellow;
 
 .notify {
+  height: max-content;
+  color: $text-message;
+  max-width: 200px;
+  font-weight: 500;
+
+  & .mat-button {
+    color: $text-btn;
+    background: $background-btn;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  }
+
   &-error {
     background-color: $del-btn-bgc;
-    color: $text-btn;
-    height: max-content;
+    color: $text-message-error;
   }
 
   &-warning {
     background-color: $reset-btn-bgc;
-    color: $text-btn;
-    height: max-content;
   }
 
   &-success {
     background-color: $save-btn-bgc;
     color: $text-btn;
-    max-width: 200px;
-    height: max-content;
-  }
-
-  & .mat-button {
-    background: $background-btn;
   }
 }

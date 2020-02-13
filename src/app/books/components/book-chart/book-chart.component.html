@@ -1,6 +1,6 @@
 <div class="chart__container">
   <h3 class="chart__title">Number of books by year of publication</h3>
-  <div *ngIf="barChartData">
+  <div *ngIf="barChartData; else loading">
     <div style="display: block">
       <canvas baseChart
         [datasets]="barChartData"
@@ -13,4 +13,8 @@
     </div>
     <button mat-button mat-raised-button color="primary" (click)="getBooks()">Update</button>
   </div>
+  <ng-template #loading>
+  <mat-progress-spinner color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+</ng-template>
 </div>

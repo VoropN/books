@@ -9,13 +9,26 @@
   ></app-search>
 
   <mat-card-actions class="book__export">
-    <button class="book__button book__button--save" mat-button (click)="exportToExcel()">
-      <mat-icon>cloud_download</mat-icon>
-      .xlsx
+    <button
+      class="book__button book__button--save"
+      mat-button matTooltip="Save books to .xlsx"
+      mat-button (click)="exportToExcel()">
+        <mat-icon>cloud_download</mat-icon>
+        .xlsx
     </button>
-    <button class="book__button book__button--save" mat-button (click)="exportToPdf()">
-      <mat-icon>cloud_download</mat-icon>
-      .pdf
+    <button
+      class="book__button book__button--save"
+      mat-button matTooltip="Save books to .pdf"
+      mat-button (click)="exportToPdf()">
+        <mat-icon>cloud_download</mat-icon>
+        .pdf
+    </button>
+    <button
+      class="book__button book__button--add"
+      mat-button matTooltip="Create book"
+      (click)="openDialog()">
+        <mat-icon>add_box</mat-icon>
+        Book
     </button>
   </mat-card-actions>
 

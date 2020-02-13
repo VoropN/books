@@ -11,6 +11,7 @@ import { DateRanges } from '../../../shared/models/date-ranges.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditBookComponent } from '../edit-book/edit-book.component';
 import { ExportFileService } from 'src/app/shared/services/export-file.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Component({
   selector: 'app-book-list',
@@ -43,12 +44,13 @@ export class BookListComponent implements OnInit, OnDestroy {
   constructor(
     private bookService: BookService,
     public dialog: MatDialog,
+    private messageService: MessageService,
     private exportFile: ExportFileService) { }
 
   public ngOnInit(): void {
     this.filterPredicate = this.filterPredicate.bind(this);
     this.bookService.getBooks()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((books) => {
         this.bookTable = new MatTableDataSource(books);
         this.bookTable.filterPredicate = this.filterPredicate;
@@ -93,15 +95,19 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   public openDialog(book: Book): void {
     const dialogRef = this.dialog.open(EditBookComponent, {
-      data: book,
+      data: book || new Book(),
     });
 
     dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((result) => {
         if (result) {
-          this.tryAddBookToCache(book);
-          Object.assign(book, result);
+          if (book) {
+            this.tryAddBookToCache(book);
+            this.updateBookOnServer(book, result);
+          } else {
+            this.createBookOnServer(result);
+          }
         }
       });
   }
@@ -111,8 +117,30 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   public undoLastEditBook(book: Book): void {
-    Object.assign(book, this.initialBookCache.get(book.ID));
+    const bookCache = this.initialBookCache.get(book.ID);
+    this.updateBookOnServer(book, bookCache);
     this.initialBookCache.delete(book.ID);
+  }
+
+  private updateBookOnServer(book: Book, changedBook: Book): void {
+    this.bookService.putBook(changedBook)
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe((updatedBook: Book) => {
+        const message = `Book "${updatedBook.Title}" updated successfully!`;
+        this.messageService.showNotification(message, 'success', 'Ok');
+        Object.assign(book, changedBook);
+      });
+  }
+
+  private createBookOnServer(book: Book): void {
+    this.bookService.postBook(book)
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe((newBook: Book) => {
+        const message = `Book "${newBook.Title}" created successfully!`;
+        this.messageService.showNotification(message, 'success', 'Ok');
+        this.bookTable.data.push(newBook);
+        this.filterBookTable(this.needUpdate);
+      });
   }
 
   private createFileName(): string {

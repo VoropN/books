@@ -1,5 +1,5 @@
 export class Book {
-  ID: number;
+  ID?: number;
   Title: string;
   Description: string;
   PageCount: number;

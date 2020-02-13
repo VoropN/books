@@ -13,16 +13,15 @@ export class EditBookComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditBookComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Book,
+    @Inject(MAT_DIALOG_DATA) public book: Book,
     private fb: FormBuilder) { }
 
   public ngOnInit(): void {
-    this.bookForm = this.fb.group({
-      Title: [this.data.Title, Validators.required],
-      Description: [this.data.Description, Validators.required],
-      PageCount: [this.data.PageCount, Validators.required],
-      PublishDate: [this.data.PublishDate, Validators.required]
-    });
+    if (this.book.ID) {
+      this.updateBook(this.book);
+    } else {
+      this.createBook();
+    }
   }
 
   public onNoClick(): void {
@@ -31,5 +30,24 @@ export class EditBookComponent implements OnInit {
 
   public updateDate(dateJSON: string): void {
     this.bookForm.patchValue({ PublishDate: dateJSON });
+  }
+
+  private updateBook(book: Book): void {
+    this.bookForm = this.fb.group({
+      ID: [book.ID],
+      Title: [book.Title, Validators.required],
+      Description: [book.Description, Validators.required],
+      PageCount: [book.PageCount, Validators.required],
+      PublishDate: [book.PublishDate, Validators.required]
+    });
+  }
+
+  private createBook(): void {
+    this.bookForm = this.fb.group({
+      Title: [null, Validators.required],
+      Description: [null, Validators.required],
+      PageCount: [null, Validators.required],
+      PublishDate: [null, Validators.required]
+    });
   }
 }

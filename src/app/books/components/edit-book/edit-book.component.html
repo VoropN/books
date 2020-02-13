@@ -15,13 +15,13 @@
         <input matInput formControlName="PageCount" />
       </mat-form-field>
       <app-date-single class="control-width"
-        [date]="data.PublishDate"
+        [date]="book.PublishDate"
         (selectDate)="updateDate($event)"
       ></app-date-single>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button [disabled]="bookForm.invalid" [mat-dialog-close]="bookForm.value" cdkFocusInitial>
+      <button mat-button [disabled]="bookForm.invalid" [mat-dialog-close]="bookForm.value">
         Ok
       </button>
     </div>
