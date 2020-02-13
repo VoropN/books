@@ -109,3 +109,34 @@ mat-dialog-container,
 .mat-dialog-container {
   overflow: hidden;
 }
+
+$reset-btn-bgc: #e7902c;
+$save-btn-bgc: #277a47;
+$del-btn-bgc: #e7322c;
+$text-btn: #fff;
+$background-btn: #333;
+
+.notify {
+  &-error {
+    background-color: $del-btn-bgc;
+    color: $text-btn;
+    height: max-content;
+  }
+
+  &-warning {
+    background-color: $reset-btn-bgc;
+    color: $text-btn;
+    height: max-content;
+  }
+
+  &-success {
+    background-color: $save-btn-bgc;
+    color: $text-btn;
+    max-width: 200px;
+    height: max-content;
+  }
+
+  & .mat-button {
+    background: $background-btn;
+  }
+}
