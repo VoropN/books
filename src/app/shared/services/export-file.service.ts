@@ -40,7 +40,7 @@ export class ExportFileService {
       columnStyles: {
         0: { cellWidth: 10 },
         1: { cellWidth: 40 },
-        2: { cellWidth: 85 },
+        2: { cellWidth: 80 },
         3: { cellWidth: 25 },
         4: { cellWidth: 25 },
       }

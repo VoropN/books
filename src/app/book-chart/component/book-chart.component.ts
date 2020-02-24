@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
-import { BookService } from '../../services/book/book.service';
 import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
+import { BookService } from 'src/app/books/services/book/book.service';
 
 @Component({
   selector: 'app-book-chart',

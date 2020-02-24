@@ -16,15 +16,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { CalendarModule } from '../calendar/calendar.module';
 import { MatIconModule } from '@angular/material/icon';
-import { BookChartComponent } from './components/book-chart/book-chart.component';
-import { ChartsModule } from 'ng2-charts';
 import { ClickStopPropagationDirective } from '../shared/directives/click-stop-propagation.directive';
+import { BooksRoutingModule } from './books-routing.module';
 
 @NgModule({
   declarations: [
     BookListComponent,
     EditBookComponent,
-    BookChartComponent,
     ClickStopPropagationDirective
   ],
   imports: [
@@ -43,7 +41,7 @@ import { ClickStopPropagationDirective } from '../shared/directives/click-stop-p
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
-    ChartsModule
+    BooksRoutingModule,
   ],
   entryComponents: [EditBookComponent]
 })
