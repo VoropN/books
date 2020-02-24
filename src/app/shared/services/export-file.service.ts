@@ -25,25 +25,40 @@ export class ExportFileService {
   }
 
   public exportAsPdfFile(books: Book[], fileName: string): void {
-    const head = ['ID', 'Title', 'Description', 'PageCount', 'PublishDate'];
+    const head = [
+      'ID',
+      'Title',
+      'Description',
+      'PageCount',
+      'PublishDate'
+    ];
     const body = this.createBodyPdf(books, head);
     const doc = new jsPDF();
     doc.autoTable({
       head: [head],
       body,
+      columnStyles: {
+        0: { cellWidth: 10 },
+        1: { cellWidth: 40 },
+        2: { cellWidth: 85 },
+        3: { cellWidth: 25 },
+        4: { cellWidth: 25 },
+      }
     });
     const options: SaveFileOptions = { fileName, extension: '.pdf' };
     doc.save(this.createFileName(options));
   }
 
-  private createBodyPdf(books, head): (string|number)[] {
+  private createBodyPdf(books: Book[], head: string[]): any {
     return books.map((book) => Object.values(head.reduce((acc, key) => ({ ...acc, [key]: this.formatField(book, key) }), {})));
   }
 
-  private formatField(book, key): number|string {
+  private formatField(book: Book, key: string): number|string {
     let field = book[key];
     if (key === 'PublishDate') {
       field = new Date(field).toLocaleString('en-US', this.dateOptions);
+    } else if (key === 'Description' || key === 'Title') {
+      field = { content: field, contentWidth: 50  };
     }
     return field;
   }
