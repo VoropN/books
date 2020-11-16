@@ -17,7 +17,7 @@ export class EditBookComponent implements OnInit {
     private fb: FormBuilder) { }
 
   public ngOnInit(): void {
-    const shouldUpdateBook = Object.prototype.hasOwnProperty.call(this.book, 'ID');
+    const shouldUpdateBook = Object.prototype.hasOwnProperty.call(this.book, 'id');
     if (shouldUpdateBook) {
       this.updateBook(this.book);
     } else {
@@ -30,25 +30,25 @@ export class EditBookComponent implements OnInit {
   }
 
   public updateDate(dateJSON: string): void {
-    this.bookForm.patchValue({ PublishDate: dateJSON });
+    this.bookForm.patchValue({ publishDate: dateJSON });
   }
 
   private updateBook(book: Book): void {
     this.bookForm = this.fb.group({
-      ID: [book.ID],
-      Title: [book.Title, Validators.required],
-      Description: [book.Description, Validators.required],
-      PageCount: [book.PageCount, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      PublishDate: [book.PublishDate, Validators.required]
+      id: [book.id],
+      title: [book.title, Validators.required],
+      description: [book.description, Validators.required],
+      pageCount: [book.pageCount, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      publishDate: [book.publishDate, Validators.required]
     });
   }
 
   private createBook(): void {
     this.bookForm = this.fb.group({
-      Title: [null, Validators.required],
-      Description: [null, Validators.required],
-      PageCount: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      PublishDate: [null, Validators.required]
+      title: [null, Validators.required],
+      description: [null, Validators.required],
+      pageCount: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      publishDate: [null, Validators.required]
     });
   }
 }

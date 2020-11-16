@@ -28,14 +28,14 @@ export class BookService {
   }
 
   public putBook(book: Book): Observable<Book> {
-    return this.http.put<Book>(`${Api.books}/${book.ID}`, book, this.httpOptions).pipe(
-      catchError((error) => this.errorHandler.handleResponceError(error, `Can\'t update book: "${book.Title}!"`))
+    return this.http.put<Book>(`${Api.books}/${book.id}`, book, this.httpOptions).pipe(
+      catchError((error) => this.errorHandler.handleResponceError(error, `Can\'t update book: "${book.title}!"`))
     );
   }
 
   public postBook(book: Book): Observable<Book> {
     return this.http.post<Book>(Api.books, book, this.httpOptions).pipe(
-      catchError((error) => this.errorHandler.handleResponceError(error, `Can\'t create book: "${book.Title}!"`))
+      catchError((error) => this.errorHandler.handleResponceError(error, `Can\'t create book: "${book.title}!"`))
     );
   }
 }

@@ -26,11 +26,11 @@ export class ExportFileService {
 
   public exportAsPdfFile(books: Book[], fileName: string): void {
     const head = [
-      'ID',
-      'Title',
-      'Description',
-      'PageCount',
-      'PublishDate'
+      'id',
+      'title',
+      'description',
+      'pageCount',
+      'publishDate'
     ];
     const body = this.createBodyPdf(books, head);
     const doc = new jsPDF();
@@ -55,9 +55,9 @@ export class ExportFileService {
 
   private formatField(book: Book, key: string): number|string {
     let field = book[key];
-    if (key === 'PublishDate') {
+    if (key === 'publishDate') {
       field = new Date(field).toLocaleString('en-US', this.dateOptions);
-    } else if (key === 'Description' || key === 'Title') {
+    } else if (key === 'description' || key === 'title') {
       field = { content: field, contentWidth: 50  };
     }
     return field;

@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public trackByBooks(index: number, book: Book): number {
-    return book.ID;
+    return book.id;
   }
 
   public onClousePanel(): void {

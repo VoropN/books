@@ -1,8 +1,8 @@
 export class Book {
-  ID?: number;
-  Title: string;
-  Description: string;
-  PageCount: number;
-  Excerpt: string;
-  PublishDate: Date | string;
+  id?: number;
+  title: string;
+  description: string;
+  pageCount: number;
+  excerpt: string;
+  publishDate: Date | string;
 }

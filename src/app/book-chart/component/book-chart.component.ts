@@ -49,7 +49,7 @@ export class BookChartComponent implements OnInit, OnDestroy {
         const bookMapByYears = {};
 
         books.forEach((book) => {
-          const year = new Date(book.PublishDate).getFullYear().toString();
+          const year = new Date(book.publishDate).getFullYear().toString();
           bookMapByYears[year] = bookMapByYears[year] ? ++bookMapByYears[year] : 1;
         });
 

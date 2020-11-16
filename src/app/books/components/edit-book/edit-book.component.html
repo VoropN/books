@@ -4,15 +4,15 @@
     <div mat-dialog-content>
       <mat-form-field>
         <mat-label>Information</mat-label>
-        <input matInput formControlName="Title" />
+        <input matInput formControlName="title" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <textarea rows="3" class="description"  matInput formControlName="Description"></textarea>
+        <textarea rows="3" class="description"  matInput formControlName="description"></textarea>
       </mat-form-field>
       <mat-form-field class="control-width">
         <mat-label>PageCount</mat-label>
-        <input matInput formControlName="PageCount" autocomplete="off"/>
+        <input matInput formControlName="pageCount" autocomplete="off"/>
       </mat-form-field>
       <app-date-single class="control-width"
         [date]="book.PublishDate"

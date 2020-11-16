@@ -4,6 +4,7 @@ import { BookChartRoutingModule } from './book-chart-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { BookChartComponent } from './component/book-chart.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [
     CommonModule,
     BookChartRoutingModule,
+    MatButtonModule,
     ChartsModule,
     MatProgressSpinnerModule,
   ]

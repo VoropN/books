@@ -32,7 +32,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   @ViewChild('table', { static: true }) public table: MatTable<Book>;
 
   public bookTable: MatTableDataSource<Book>;
-  public displayedColumns: string[] = ['ID', 'Title', 'PageCount', 'PublishDate', 'Edit'];
+  public displayedColumns: string[] = ['id', 'title', 'pageCount', 'publishDate', 'edit'];
   public expandedElement: Book | null;
   public showSpinner = true;
   public initialBookCache = new Map<number, Book>();
@@ -115,12 +115,12 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   public hasBookCache(book: Book): boolean {
-    return this.initialBookCache.has(book.ID);
+    return this.initialBookCache.has(book.id);
   }
 
   public undoLastEditBook(book: Book): void {
-    const bookCache = this.initialBookCache.get(book.ID);
-    const afterUpdate = () => this.initialBookCache.delete(book.ID);
+    const bookCache = this.initialBookCache.get(book.id);
+    const afterUpdate = () => this.initialBookCache.delete(book.id);
     this.updateBookOnServer(book, bookCache, afterUpdate);
   }
 
@@ -128,7 +128,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookService.putBook(changedBook)
       .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((updatedBook: Book) => {
-        const message = `Book "${updatedBook.Title}" updated successfully!`;
+        const message = `Book "${updatedBook.title}" updated successfully!`;
         this.messageService.showNotification(message, 'success', 'Ok');
         Object.assign(book, changedBook);
         if (afterUpdate) {
@@ -141,7 +141,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookService.postBook(book)
       .pipe(takeUntil(this.destroy$), take(1))
       .subscribe((newBook: Book) => {
-        const message = `Book "${newBook.Title}" created successfully!`;
+        const message = `Book "${newBook.title}" created successfully!`;
         this.messageService.showNotification(message, 'success', 'Ok');
         this.bookTable.data.push(newBook);
         this.filterBookTable(this.needUpdate);
@@ -155,7 +155,7 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   private tryAddBookToCache(book: Book): void {
     if (!this.hasBookCache(book)) {
-      this.initialBookCache.set(book.ID, { ...book });
+      this.initialBookCache.set(book.id, { ...book });
     }
   }
 
@@ -163,18 +163,18 @@ export class BookListComponent implements OnInit, OnDestroy {
     let checkDate = true;
     let checkValue = true;
     if (this.selectDate && (this.selectDate.startDate || this.selectDate.endDate)) {
-      const publishDate = Number(new Date(book.PublishDate));
+      const publishDate = Number(new Date(book.publishDate));
       const startDate = this.selectDate.startDate.valueOf();
       const endDate = this.selectDate.endDate.valueOf();
       checkDate = publishDate >= startDate && publishDate <= endDate;
     }
     if (this.searchValue !== '') {
-      checkValue = book.Title.toLowerCase().includes(this.searchValue);
+      checkValue = book.title.toLowerCase().includes(this.searchValue);
     }
     return checkDate && checkValue;
   }
 
   private trackByBooks(index: number, book: Book): number {
-    return book.ID;
+    return book.id;
   }
 }
